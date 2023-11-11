@@ -1,17 +1,32 @@
+
 const express = require('express');
 const router = express.Router();
+
+// Import routes
+const authRoutes = require('./auth');
+
+// Use routes
+router.use('/auth', authRoutes);
+
 let helper = require('../helpers/mail');
 
 
 
-// Home page route
+// Home route
 router.get('/', (req, res) => {
-    res.send('Hello World')
+    res.render('index');
 })
 
 
 
-// Send email route
+// Dashboard route
+router.get('/dashboard', (req, res) => {
+    res.render('', {layout: 'dashboard'});
+})
+
+
+
+// Send email to user
 router.post('/send/:token', async (req, res) => {
     
     let token = req.params.token;
@@ -39,9 +54,9 @@ router.post('/send/:token', async (req, res) => {
 
 
 
-// handling invalid routes
+// 404 route
 router.get('*', (req, res) => {
-    res.status(404).send('Invalid route');
+    res.render('404');
 })
 
 
