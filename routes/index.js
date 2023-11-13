@@ -8,7 +8,13 @@ const authRoutes = require('./auth');
 // Use routes
 router.use('/auth', authRoutes);
 
-let helper = require('../helpers/mail');
+let helper = require('../helpers/nodemailer');
+
+
+
+function isLoggedIn(req, res, next) {
+    req.user ? next() : res.sendStatus(401);
+}
 
 
 
@@ -20,9 +26,12 @@ router.get('/', (req, res) => {
 
 
 // Dashboard route
-router.get('/dashboard', (req, res) => {
-    res.render('', {layout: 'dashboard'});
-})
+// router.get('/dashboard', isLoggedIn, (req, res) => {
+//     res.render('dashboard', { 
+//         user: req.user, 
+//         layout: 'dashboard'
+//     });
+// })
 
 
 

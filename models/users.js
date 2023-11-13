@@ -7,6 +7,15 @@ const userSchema = new Schema({
         type: String,
         required: true
     },
+    provider: {
+        type: String,
+        required: true,
+        default: 'local'
+    },
+    provider_id: {
+        type: String,
+        required: false
+    },
     email: {
         type: String,
         required: true
